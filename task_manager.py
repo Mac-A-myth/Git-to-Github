@@ -43,6 +43,25 @@ def complete_task(task_id):
             print(f"Task {task_id} marked as completed.")
             return
     print(f"Task {task_id} not found.")
+    
+def delete_task(task_id):
+    tasks = load_tasks()
+    tasks = [task for task in tasks if task['id'] != task_id]
+    # Reassign IDs
+    for i, task in enumerate(tasks, 1):
+        task['id'] = i
+    save_tasks(tasks)
+    print(f"Task {task_id} deleted.")
+
+# Add this to the menu in main function:
+# print("5. Delete task")
+# And in the choice handling:
+# elif choice == '5':
+#     try:
+#         task_id = int(input("Enter task ID to delete: "))
+#         delete_task(task_id)
+#     except ValueError:
+#         print("Please enter a valid number.")    
 
 if __name__ == "__main__":
     while True:
